@@ -23,7 +23,7 @@ export default function Home() {
     setLoading(true)
     try {
       const url = query 
-        ? `/songs/search?query=${encodeURIComponent(query)}&limit=30` 
+        ? `/songs/search?query=${encodeURIComponent(query)}&limit=50` 
         : '/songs'
       const res = await api.get(url)
       setSongs(res.data)
@@ -170,83 +170,3 @@ export default function Home() {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-// import { useEffect, useState } from 'react'
-// import { useSelector } from 'react-redux'
-// import api from '../lib/axios'
-// import SongCard from '../components/SongCard'
-// import Navbar from '../components/Navbar'
-// import MiniPlayer from '../components/MiniPlayer'
-
-// export default function Home() {
-//   const [songs, setSongs] = useState([])
-//   const [searchQuery, setSearchQuery]= useState('')
-//   const [loading, setLoading] = useState(true)
-//   const {user} = useSelector(state=>state.auth)
-
-//   const fetchSongs = async(query='')=>{
-//     setLoading(true)
-//     try{
-//         const url = query ? `/songs/search?query=${encodeURIComponent(query)}&limit=30` : '/songs'
-//         //const url = query ? `/songs/search?genre=rock&limit=10` : '/songs'
-//         const res=await api.get(url)
-//         setSongs(res.data)
-//     }catch(err){
-//         console.error(err)
-//     }finally{
-//         setLoading(false)
-//     }
-//   }
-
-//   useEffect(() => {
-//     fetchSongs()
-//   }, [])
-
-//   const handleSearch=(e)=>{
-//     e.preventDefault()
-//     fetchSongs(searchQuery)
-//   }
-
-//   return (
-//     <div className="min-h-screen bg-dark pb-24">
-//       <Navbar />
-//       <div className="container mx-auto px-6 py-10">
-//         <form onSubmit={handleSearch} className="mb-8 flex gap-4">
-//           <input
-//             type="text"
-//             placeholder="Search songs or artists..."
-//             value={searchQuery}
-//             onChange={(e) => setSearchQuery(e.target.value)}
-//             className="flex-1 p-3 rounded bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary text-white"
-//           />
-//           <button type="submit" className="bg-primary px-6 py-3 rounded-full hover:bg-green-500 transition">
-//             Search
-//           </button>
-//         </form>
-//         <h2 className="text-4xl font-bold mb-8">
-//           {searchQuery ? `Results for "${searchQuery}"` : user ? 'Your Library' : 'All Songs'}
-//         </h2>
-//         {loading ? (
-//           <p className="text-center text-2xl">Loading...</p>
-//         ) : songs.length === 0 ? (
-//           <p className="text-center text-gray-400">No songs found. Try searching!</p>
-//         ) : (
-//           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-//             {songs.map(song => (
-//               <SongCard key={song._id} song={song} />
-//             ))}
-//           </div>
-//         )}
-//       </div>
-//       <MiniPlayer />
-//     </div>
-//   )
-// }

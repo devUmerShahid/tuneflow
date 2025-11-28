@@ -5,6 +5,9 @@ import './index.css'
 import { Provider } from 'react-redux'
 import { store } from './app/store.js'
 import {Toaster} from 'react-hot-toast'
+import { checkAuth } from './features/auth/authSlice.js'
+
+store.dispatch(checkAuth())
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
