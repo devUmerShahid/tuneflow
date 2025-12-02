@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { store } from './app/store.js'
 import {Toaster} from 'react-hot-toast'
 import { checkAuth } from './features/auth/authSlice.js'
-import { Analytics } from "@vercel/analytics/next"
+import { inject } from '@vercel/analytics';
 
 store.dispatch(checkAuth())
 
@@ -16,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Toaster position="bottom-center"/>
   </Provider>
 )
+inject();
 
 
 // import { StrictMode } from 'react'

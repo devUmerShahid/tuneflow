@@ -9,7 +9,7 @@ import AuthPage from './pages/Login'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import MiniPlayer from './components/MiniPlayer'
-import { Analytics } from "@vercel/analytics/next"
+//import { Analytics } from "@vercel/analytics/next"
 
 
 function ProtectedRoute({ children }) {
@@ -41,7 +41,6 @@ export default function App() {
 
         {/* Global Player */}
         <MiniPlayer />
-        <Analytics />
       </div>
     </Router>
   )
