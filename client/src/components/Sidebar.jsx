@@ -12,7 +12,7 @@ import {
 import { useState, useEffect } from 'react'
 import CreatePlaylistModal from './CreatePlaylistModal'
 import api from '../lib/axios'
-import toast from 'react-hot-toast'
+//import toast from 'react-hot-toast'
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false)
@@ -51,26 +51,27 @@ export default function Sidebar() {
             </div>
             <h1 className="text-2xl font-bold">TuneFlow</h1>
             </div>
-        {/* <div className="flex items-center gap-3 mb-10">
+        <div className="flex items-center gap-3 mb-10">
           <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-black font-bold text-xl">T</div>
           <h1 className="text-2xl font-bold">TuneFlow</h1>
-        </div> */}
+        </div>
 
         <nav className="space-y-6 mb-10">
           {navItems.map(item => (
             <Link
-              key={item.to}
-              onClick={() => setOpen(false)}
-              className={`flex items-center gap-4 text-lg transition-all ${
+                key={item.to}
+                to={item.to}  // ← THIS LINE WAS MISSING
+                onClick={() => setOpen(false)}
+                className={`flex items-center gap-4 text-lg transition-all ${
                 location.pathname === item.to 
-                  ? 'text-white font-bold' 
-                  : 'text-gray-400 hover:text-white'
-              }`}
+                    ? 'text-white font-bold' 
+                    : 'text-gray-400 hover:text-white'
+                }`}
             >
-              <item.icon size={24} />
-              {item.label}
+                <item.icon size={24} />
+                {item.label}
             </Link>
-          ))}
+            ))}
         </nav>
 
         <div>
@@ -82,17 +83,18 @@ export default function Sidebar() {
           </div>
           <div className="space-y-2 max-h-96 overflow-y-auto">
             {playlists.map(p => (
-              <Link
-                key={p._id}
-                to={`/playlist/${p._id}`}
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-3 p-2 rounded hover:bg-gray-900 transition"
-              >
-                <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-blue-600 rounded flex items-center justify-center text-xs font-bold">
-                  {p.name[0]}
-                </div>
-                <span className="truncate">{p.name}</span>
-              </Link>
+                <Link
+                    key={p._id}
+                    to={`/playlist/${p._id}`}
+
+                    onClick={() => setOpen(false)}
+                    className="flex items-center gap-3 p-2 rounded hover:bg-gray-900 transition"
+                >
+                    <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-blue-600 rounded flex items-center justify-center text-xs font-bold">
+                    {p.name[0]}
+                    </div>
+                    <span className="truncate">{p.name}</span>
+                </Link>
             ))}
           </div>
         </div>
