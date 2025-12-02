@@ -124,7 +124,7 @@ export default function SongCard({ song }) {
                 )}
                 <div className="border-t border-gray-800 mt-1 pt-1">
                   <button className="w-full text-left px-4 py-2 hover:bg-gray-800 transition text-sm text-primary">
-                    + Create New Playlist
+                    + Select Your Playlist
                   </button>
                 </div>
               </div>

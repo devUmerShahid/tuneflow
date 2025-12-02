@@ -51,10 +51,10 @@ export default function Sidebar() {
             </div>
             <h1 className="text-2xl font-bold">TuneFlow</h1>
             </div>
-        <div className="flex items-center gap-3 mb-10">
+        {/* <div className="flex items-center gap-3 mb-10">
           <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-black font-bold text-xl">T</div>
           <h1 className="text-2xl font-bold">TuneFlow</h1>
-        </div>
+        </div> */}
 
         <nav className="space-y-6 mb-10">
           {navItems.map(item => (

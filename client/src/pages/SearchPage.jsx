@@ -9,7 +9,7 @@ export default function SearchPage() {
 
   return (
     <div className="min-h-screen bg-dark text-white pb-24">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container mx-auto px-6 py-20">
         <h1 className="text-6xl font-bold mb-12">Search</h1>
         

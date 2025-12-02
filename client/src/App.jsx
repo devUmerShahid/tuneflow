@@ -9,7 +9,7 @@ import AuthPage from './pages/Login'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import MiniPlayer from './components/MiniPlayer'
-//import { Analytics } from "@vercel/analytics/next"
+import PlaylistDetail from './pages/PlaylistDetail'
 
 
 function ProtectedRoute({ children }) {
@@ -35,6 +35,7 @@ export default function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/liked" element={<LikedSongs />} />
               <Route path="/library" element={<LibraryPage />} />
+              <Route path="/playlist/:id" element={<PlaylistDetail />} />
             </Routes>
           </main>
         </div>

@@ -6,7 +6,7 @@ const songSchema = mongoose.Schema({
   album: String,
   genre: String,
   duration: String,
-  songUrl: { type: String, required: true },   // Cloudinary or direct URL
+  songUrl: { type: String, required: true },   
   imageUrl: { type: String },
   uploadedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 }, { timestamps: true });

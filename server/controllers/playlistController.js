@@ -24,18 +24,36 @@ const deletePlaylist = async (req, res) => {
   res.json({ message: "Deleted" });
 };
 
-const addSongToPlaylist = async (req, res) => {
-  const { playlistId, songId } = req.body;
-  const playlist = await Playlist.findById(playlistId);
-  if (!playlist.songs.includes(songId)) {
-    playlist.songs.push(songId);
-    await playlist.save();
+const addToPlaylist = async (req, res) => {
+  try {
+    const { playlistId, songId } = req.body;
+    const playlist = await Playlist.findById(playlistId);
+    
+    if (playlist.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    if (!playlist.songs.includes(songId)) {
+      playlist.songs.push(songId);
+      await playlist.save();
+    }
+
+    await playlist.populate("songs");
+    res.json(playlist);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
   }
-  await playlist.populate("songs");
-  res.json(playlist);
+  // const { playlistId, songId } = req.body;
+  // const playlist = await Playlist.findById(playlistId);
+  // if (!playlist.songs.includes(songId)) {
+  //   playlist.songs.push(songId);
+  //   await playlist.save();
+  // }
+  // await playlist.populate("songs");
+  // res.json(playlist);
 };
 
-const removeSongFromPlaylist = async (req, res) => {
+const removeFromPlaylist = async (req, res) => {
   const { playlistId, songId } = req.body;
   const playlist = await Playlist.findById(playlistId);
   playlist.songs = playlist.songs.filter(s => s.toString() !== songId);
@@ -44,7 +62,7 @@ const removeSongFromPlaylist = async (req, res) => {
   res.json(playlist);
 };
 
-export { createPlaylist, getUserPlaylists, deletePlaylist, addSongToPlaylist, removeSongFromPlaylist };
+export { createPlaylist, getUserPlaylists, deletePlaylist, addToPlaylist, removeFromPlaylist };
 
 
 
