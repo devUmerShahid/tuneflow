@@ -26,7 +26,7 @@ export default function SearchPage() {
     setSelectedCategory(name)
     setLoading(true)
     try {
-      const res = await api.get(`/songs/search?query=${encodeURIComponent(query)}&limit=30`)
+      const res = await api.get(`/songs/search?query=${encodeURIComponent(query)}&limit=20`)
       setSongs(res.data)
     } catch (err) {
       toast.error("Failed to load songs", err)
