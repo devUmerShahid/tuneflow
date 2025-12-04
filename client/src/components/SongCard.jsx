@@ -16,6 +16,7 @@ export default function SongCard({ song }) {
   // Check if song is already liked
   useEffect(() => {
     if (user?.likedSongs) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsLiked(user.likedSongs.some(s => s._id === song._id))
     }
   }, [user, song._id])

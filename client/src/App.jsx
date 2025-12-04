@@ -10,6 +10,7 @@ import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import MiniPlayer from './components/MiniPlayer'
 import PlaylistDetail from './pages/PlaylistDetail'
+import BrowsePage from './pages/Browse'
 
 
 function ProtectedRoute({ children }) {
@@ -26,7 +27,7 @@ export default function App() {
 
         {/* Main Content Area */}
         <div className="lg:ml-72">
-          <Navbar />
+          {/* <Navbar /> */}
           <main className="pb-24">
             <Routes>
               <Route path="/login" element={<AuthPage />} />
@@ -36,6 +37,7 @@ export default function App() {
               <Route path="/liked" element={<LikedSongs />} />
               <Route path="/library" element={<LibraryPage />} />
               <Route path="/playlist/:id" element={<PlaylistDetail />} />
+              <Route path="/browse" element={<BrowsePage />} />
             </Routes>
           </main>
         </div>

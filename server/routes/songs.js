@@ -5,7 +5,7 @@ import protect from "../middleware/protect.js";
 const router = express.Router();
 
 router.get("/", getSongs);
-router.get("/search",protect, searchSongs);
+router.get("/search", searchSongs);
 router.post("/", protect, addSong);
 router.post("/like", protect, toggleLike);
 router.get("/liked", protect, getLikedSongs);
