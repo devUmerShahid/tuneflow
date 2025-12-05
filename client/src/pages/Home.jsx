@@ -53,10 +53,10 @@ export default function Home() {
   return (
     <div className="container mx-auto pt-30 px-6 py-10">
       {/* Search Bar */}
-      <form onSubmit={handleSearch} className="mb-12 flex gap-4 max-w-2xl mx-auto">
+      {/* <form onSubmit={handleSearch} className="mb-12 flex gap-4 max-w-2xl mx-auto">
         <input
           type="text"
-          placeholder="Search songs, artists..."
+          placeholder="Search i.e, lofi, pop..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="flex-1 p-4 rounded-full bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary text-lg"
@@ -64,6 +64,25 @@ export default function Home() {
         <button type="submit" className="bg-primary px-8 py-4 rounded-full font-bold hover:bg-green-500 transition">
           Search
         </button>
+      </form> */}
+      <form onSubmit={handleSearch} className="mb-12 max-w-2xl mx-auto px-4">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="i.e, lofi, pop..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-6 pr-16 py-5 rounded-full bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary text-lg text-white placeholder-gray-400 transition"
+          />
+          
+          {/* Green Search Button Inside Input */}
+          <button
+            type="submit"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-green-600 hover:bg-green-400 text-black font-bold px-8 py-3.5 rounded-full transition shadow-lg hover:shadow-primary/50"
+          >
+            Search
+          </button>
+        </div>
       </form>
 
       {/* Title */}
