@@ -6,7 +6,7 @@ import SongCard from '../components/SongCard'
 import toast from 'react-hot-toast'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-const SONGS_PER_PAGE = 12
+const SONGS_PER_PAGE = 18
 
 export default function Home() {
   const [songs, setSongs] = useState([])

@@ -6,14 +6,13 @@ import { Heart, Play, MoreVertical } from 'lucide-react'
 import toast from 'react-hot-toast'
 import api from '../lib/axios'
 
-export default function SongCard({ song }) {
+export default function SongCard({ song, currentSongsList = [] }) {  // optional: pass current list
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.auth)
   const [isLiked, setIsLiked] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [playlists, setPlaylists] = useState([])
 
-  // Check if song is already liked
   useEffect(() => {
     if (user?.likedSongs) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -21,7 +20,6 @@ export default function SongCard({ song }) {
     }
   }, [user, song._id])
 
-  // Fetch user's playlists for "Add to Playlist" menu
   const fetchPlaylists = async () => {
     try {
       const res = await api.get('/playlists')
@@ -31,7 +29,6 @@ export default function SongCard({ song }) {
     }
   }
 
-  // Toggle Like
   const toggleLike = async () => {
     if (!user) {
       toast.error("Please login to like songs")
@@ -47,7 +44,6 @@ export default function SongCard({ song }) {
     }
   }
 
-  // Add to Playlist
   const addToPlaylist = async (playlistId) => {
     try {
       await api.post('/playlists/add', { playlistId, songId: song._id })
@@ -56,6 +52,17 @@ export default function SongCard({ song }) {
     } catch (err) {
       toast.error("Failed to add to playlist", err)
     }
+  }
+
+  // FINAL FIX — PLAY BUTTON NOW WORKS
+  const handlePlay = () => {
+    dispatch(playSong({
+      song,
+      queue: currentSongsList.length > 0 ? currentSongsList : [song],  // use current list or just this song
+      index: currentSongsList.length > 0 
+        ? currentSongsList.findIndex(s => s._id === song._id) 
+        : 0
+    }))
   }
 
   return (
@@ -68,7 +75,7 @@ export default function SongCard({ song }) {
           className="w-full aspect-square object-cover rounded-md shadow-lg"
         />
         <button
-          onClick={() => dispatch(playSong(song))}
+          onClick={handlePlay}  // ← FIXED
           className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black bg-opacity-60 rounded-md"
         >
           <Play size={48} fill="#1db954" className="text-white drop-shadow-lg" />
@@ -81,11 +88,7 @@ export default function SongCard({ song }) {
 
       {/* Action Buttons */}
       <div className="flex items-center justify-between mt-3">
-        {/* Like Button */}
-        <button
-          onClick={toggleLike}
-          className="transition-all duration-200 hover:scale-110"
-        >
+        <button onClick={toggleLike} className="transition-all duration-200 hover:scale-110">
           <Heart
             size={22}
             fill={isLiked ? "#1db954" : "none"}
@@ -94,7 +97,7 @@ export default function SongCard({ song }) {
           />
         </button>
 
-        {/* More Options Menu */}
+        {/* More Options */}
         <div className="relative">
           <button
             onClick={() => {
@@ -106,7 +109,6 @@ export default function SongCard({ song }) {
             <MoreVertical size={20} />
           </button>
 
-          {/* Dropdown Menu */}
           {isMenuOpen && (
             <div className="absolute right-0 bottom-10 w-48 bg-gray-900 rounded-lg shadow-2xl border border-gray-800 z-10 overflow-hidden">
               <div className="py-2">
@@ -134,48 +136,9 @@ export default function SongCard({ song }) {
         </div>
       </div>
 
-      {/* Click outside to close menu */}
       {isMenuOpen && (
-        <div
-          className="fixed inset-0 z-0"
-          onClick={() => setIsMenuOpen(false)}
-        />
+        <div className="fixed inset-0 z-0" onClick={() => setIsMenuOpen(false)} />
       )}
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-// import { useDispatch } from 'react-redux'
-// import { playSong } from '../features/player/playerSlice'
-// import { Heart, Play } from 'lucide-react'
-
-// export default function SongCard({ song }) {
-//   const dispatch = useDispatch()
-
-//   return (
-//     <div className="bg-dark-light p-4 rounded-lg hover:bg-gray-800 transition group">
-//       <div className="relative">
-//         <img src={song.imageUrl || "/vite.svg"} alt={song.title} className="w-full h-48 object-cover rounded" />
-//         <button
-//           onClick={() => dispatch(playSong(song))}
-//           className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition bg-black bg-opacity-60"
-//         >
-//           <Play size={48} fill="white" className="text-white" />
-//         </button>
-//       </div>
-//       <h3 className="mt-3 font-semibold truncate">{song.title}</h3>
-//       <p className="text-sm text-gray-400">{song.artist}</p>
-//       <button className="mt-2 text-red-500 hover:text-red-400">
-//         <Heart size={20} />
-//       </button>
-//     </div>
-//   )
-// }

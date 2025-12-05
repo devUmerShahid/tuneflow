@@ -33,6 +33,7 @@ export default function Sidebar() {
         .then(res => setPlaylists(res.data))
         .catch(() => {})
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPlaylists([])
     }
   }, [user])
@@ -41,7 +42,7 @@ export default function Sidebar() {
     try {
       await api.get('/auth/logout')
     } catch (err) {
-      console.log("Logout failed, continuing...")
+      console.log("Logout failed, continuing...", err)
     }
     dispatch(logout())
     toast.success("Logged out successfully")
@@ -68,7 +69,7 @@ export default function Sidebar() {
       </button>
 
       {/* Sidebar - Scrollable Content */}
-      <aside className={`fixed inset-y-0 left-0 w-72 bg-black p-6 transform transition-transform z-40 lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'} flex flex-col`}>
+      <aside className={`fixed inset-y-0 left-0 w-72 bg-black p-6 transform transition-transform z-40 lg:translate-x-0 ${open ? 'translate-x-1' : '-translate-x-full'} flex flex-col`}>
         {/* Logo */}
         <div className="flex items-center gap-3 mb-12 flex-shrink-0">
           <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-black font-bold text-xl">
@@ -179,144 +180,3 @@ export default function Sidebar() {
     </>
   )
 }
-
-
-
-
-
-
-
-
-
-// // client/src/components/Sidebar.jsx
-// import { Link, useLocation } from 'react-router-dom'
-// import { 
-//   Home, 
-//   Search, 
-//   Library, 
-//   Heart, 
-//   PlusCircle,
-//   Menu,
-//   X,
-//   ChevronRight
-// } from 'lucide-react'
-// import { useState, useEffect } from 'react'
-// import CreatePlaylistModal from './CreatePlaylistModal'
-// import api from '../lib/axios'
-// import App from '../App'
-
-// export default function Sidebar() {
-//   const [open, setOpen] = useState(false)
-//   const [modalOpen, setModalOpen] = useState(false)
-//   const [playlists, setPlaylists] = useState([])
-//   const location = useLocation()
-
-//   useEffect(() => {
-//     api.get('/playlists')
-//       .then(res => setPlaylists(res.data))
-//       .catch(() => {})
-//   }, [])
-
-//   const navItems = [
-//     { to: "/", icon: Home, label: "Home" },
-//     { to: "/search", icon: Search, label: "Search" },
-//     //{ to: "/browse", icon: App, label: "Browse" },
-//     { to: "/liked", icon: Heart, label: "Liked Songs" },
-//     { to: "/library", icon: Library, label: "Your Library" },
-//   ]
-
-//   // Show only first 2 playlists
-//   const displayedPlaylists = playlists.slice(0, 2)
-
-//   return (
-//     <>
-//       {/* Mobile Toggle */}
-//       <button
-//         onClick={() => setOpen(!open)}
-//         className="fixed top-20 left-4 z-50 lg:hidden bg-black/80 p-2 rounded-full shadow-lg"
-//       >
-//         {open ? <X size={28} /> : <Menu size={28} />}
-//       </button>
-
-//       {/* Sidebar */}
-//       <aside className={`fixed inset-y-0 left-0 w-72 bg-black p-6 transform transition-transform z-40 lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
-//         {/* Logo */}
-//         <div className="flex items-center gap-3 mb-12">
-//           <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-black font-bold text-xl">
-//             T
-//           </div>
-//           <img src="/tuneflow.png" alt="TuneFlow Logo" className="h-12" />
-//         </div>
-
-//         {/* Navigation */}
-//         <nav className="space-y-6 mb-10">
-//           {navItems.map(item => (
-//             <Link
-//               key={item.to}
-//               to={item.to}
-//               onClick={() => setOpen(false)}
-//               className={`flex items-center gap-4 text-lg transition-all duration-200 ${
-//                 location.pathname === item.to 
-//                   ? 'text-white font-bold' 
-//                   : 'text-gray-400 hover:text-white'
-//               }`}
-//             >
-//               <item.icon size={24} />
-//               {item.label}
-//             </Link>
-//           ))}
-//         </nav>
-
-//         {/* Playlists Section */}
-//         <div className="border-t border-gray-800 pt-6">
-//           <div className="flex items-center justify-between mb-4">
-//             <h3 className="text-lg font-semibold text-gray-300">Your Playlists</h3>
-//             <button onClick={() => setModalOpen(true)}>
-//               <PlusCircle size={24} className="text-gray-400 hover:text-white transition" />
-//             </button>
-//           </div>
-
-//           {/* Only 2 Playlists */}
-//           <div className="space-y-2">
-//             {displayedPlaylists.length === 0 ? (
-//               <p className="text-gray-600 text-sm italic">No playlists yet</p>
-//             ) : (
-//               displayedPlaylists.map(p => (
-//                 <Link
-//                   key={p._id}
-//                   to={`/playlist/${p._id}`}
-//                   onClick={() => setOpen(false)}
-//                   className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-900 transition group"
-//                 >
-//                   <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg flex items-center justify-center text-xs font-bold shadow-md">
-//                     {p.name[0].toUpperCase()}
-//                   </div>
-//                   <span className="truncate text-sm">{p.name}</span>
-//                 </Link>
-//               ))
-//             )}
-//           </div>
-
-//           {/* See More Button */}
-//           {playlists.length > 2 && (
-//             <Link
-//               to="/library"
-//               onClick={() => setOpen(false)}
-//               className="flex items-center justify-between mt-4 p-3 rounded-lg hover:bg-gray-900 transition text-primary font-medium text-sm group"
-//             >
-//               <span>See all playlists ({playlists.length})</span>
-//               <ChevronRight size={20} className="group-hover:translate-x-1 transition" />
-//             </Link>
-//           )}
-//         </div>
-//       </aside>
-
-//       {/* Create Playlist Modal */}
-//       <CreatePlaylistModal 
-//         isOpen={modalOpen} 
-//         onClose={() => setModalOpen(false)} 
-//         onCreated={(p) => setPlaylists(prev => [...prev, p])}
-//       />
-//     </>
-//   )
-// }
