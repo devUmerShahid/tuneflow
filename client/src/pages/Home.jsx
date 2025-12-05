@@ -51,7 +51,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="container mx-auto px-6 py-10">
+    <div className="container mx-auto pt-30 px-6 py-10">
       {/* Search Bar */}
       <form onSubmit={handleSearch} className="mb-12 flex gap-4 max-w-2xl mx-auto">
         <input

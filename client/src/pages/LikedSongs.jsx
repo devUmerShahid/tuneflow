@@ -45,7 +45,7 @@ export default function LikedSongs() {
   )
 
   return (
-    <div className="container mx-auto px-6 py-10">
+    <div className="container mx-auto px-6 py-10 pt-23">
       <div className="flex items-end gap-8 mb-12">
         <div className="w-24 h-24 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl">
           <Heart size={50} fill="white" />

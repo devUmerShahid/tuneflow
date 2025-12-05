@@ -21,7 +21,7 @@ export default function PlaylistDetail() {
   if (!playlist) return <div className="text-center py-20 text-xl text-gray-400">Playlist not found</div>
 
   return (
-    <div className="container mx-auto px-6 py-10">
+    <div className="container mx-auto px-6 py-24">
       {/* Back Button */}
       <Link to="/library" className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition">
         <ArrowLeft size={20} />
@@ -30,7 +30,7 @@ export default function PlaylistDetail() {
 
       {/* Header */}
       <div className="flex items-end gap-8 mb-12">
-        <div className="w-34 h-34 bg-gradient-to-br from-green-600 to-blue-600 rounded-xl flex items-center justify-center shadow-2xl text-5xl font-black">
+        <div className="w-18 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-xl flex items-center justify-center shadow-2xl text-5xl font-black">
           {playlist.name[0]}
         </div>
         <div>
@@ -38,14 +38,14 @@ export default function PlaylistDetail() {
           <p className="text-xl text-gray-300">
             {playlist.songs?.length || 0} songs
           </p>
-          <div className="flex gap-4 mt-2">
+          {/* <div className="flex gap-4 mt-2">
             <button className="bg-primary hover:bg-green-500 p-5 rounded-full font-bold text-xl flex items-center gap-3 transition shadow-lg">
               <Play fill="black" /> Play
             </button>
             <button className="border border-gray-600 hover:border-white p-5 rounded-4xl font-bold text-xl transition flex items-center gap-3">
               <Shuffle /> Shuffle
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 

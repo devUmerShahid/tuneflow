@@ -19,10 +19,10 @@ export default function LibraryPage() {
   }, [user])
 
   return (
-    <div className="min-h-screen bg-dark text-white pb-24">
+    <div className="min-h-screen bg-dark text-white pb-24 pt-20">
       {/* <Navbar /> */}
       <div className="container mx-auto px-6 py-10">
-        <h1 className="text-5xl font-bold mb-10">Your Library</h1>
+        <h1 className="text-3xl font-bold mb-10">Your Library</h1>
 
         <div className="space-y-8">
           {/* Liked Songs */}

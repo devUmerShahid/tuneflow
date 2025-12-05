@@ -37,7 +37,7 @@ export default function SearchPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-dark to-black">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-dark to-black pt-15">
       {/* Hero Header */}
       <div className="px-6 py-16 text-center">
         <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-green-400 bg-clip-text text-transparent mb-6">
