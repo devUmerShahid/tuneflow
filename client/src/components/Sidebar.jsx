@@ -51,7 +51,7 @@ export default function Sidebar() {
 
   const navItems = [
     { to: "/", icon: Home, label: "Home" },
-    { to: "/search", icon: Search, label: "Search" },
+    // { to: "/search", icon: Search, label: "Search" },
     { to: "/liked", icon: Heart, label: "Liked Songs" },
     { to: "/library", icon: Library, label: "Your Library" },
   ]
