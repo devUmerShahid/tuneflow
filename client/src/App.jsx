@@ -11,6 +11,7 @@ import Navbar from './components/Navbar'
 import MiniPlayer from './components/MiniPlayer'
 import PlaylistDetail from './pages/PlaylistDetail'
 import BrowsePage from './pages/Browse'
+import Footer from './components/Footer'
 
 
 function ProtectedRoute({ children }) {
@@ -44,6 +45,7 @@ export default function App() {
 
         {/* Global Player */}
         <MiniPlayer />
+        <Footer/>
       </div>
     </Router>
   )
